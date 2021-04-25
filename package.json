@@ -1,0 +1,56 @@
+{
+	"name": "dungeon-crawler",
+	"version": "0.0.1",
+	"description": "Isometric action RPG about adventure in Dark word",
+	"scripts": {
+		"start": "parcel src/index.html -p 8000",
+		"build": "parcel build src/index.html --out-dir dist",
+		"test": "jest --config ./jest.config.js",
+		"prettier": "prettier --write src/**/*.ts tests/**/*.js",
+		"lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
+		"lint:write": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
+		"prepare": "husky install",
+    "pre-commit": "lint-staged"
+	},
+  "lint-staged": {
+    "*.(js|ts)": [
+      "npm run lint:write"
+    ]
+  },
+	"author": "Aleksandr Lipovskiy <GoodCrash>",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/AleksandrLipovskiy-GoodCrash/dungeon-crawler.git"
+	},
+	"homepage": "https://lipovskiy.com",
+	"devDependencies": {
+		"@types/jest": "^26.0.22",
+		"@types/node": "^14.14.41",
+		"@typescript-eslint/eslint-plugin": "^2.29.0",
+		"@typescript-eslint/parser": "^2.29.0",
+		"eslint": "^6.8.0",
+		"eslint-plugin-jest": "^24.3.5",
+		"eslint-plugin-prettier": "^3.4.0",
+		"husky": "^6.0.0",
+		"jest": "^26.6.3",
+		"lint-staged": "^10.5.4",
+		"minimist": ">=1.2.2",
+		"parcel-plugin-clean-easy": "^1.0.2",
+		"parcel-plugin-static-files-copy": "^2.4.3",
+		"prettier": "^2.2.1",
+		"ts-jest": "^26.5.5",
+		"ts-node": "^9.1.1",
+		"typescript": "^3.8.3"
+	},
+	"dependencies": {
+		"phaser": "^3.50.1"
+	},
+	"parcelCleanPaths": [
+		"dist"
+	],
+	"staticFiles": {
+		"staticPath": "public",
+		"watcherGlob": "**"
+	}
+}
