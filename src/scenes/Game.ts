@@ -5,31 +5,20 @@ export default class Game extends Phaser.Scene {
     super('game')
   }
 
-  preload() {
-    this.load.setBaseURL('http://labs.phaser.io')
-
-    this.load.image('sky', 'assets/skies/space3.png')
-    this.load.image('logo', 'assets/sprites/phaser3-logo.png')
-    this.load.image('red', 'assets/particles/red.png')
-  }
-
   create() {
-    this.add.image(400, 300, 'sky')
+    const map: Phaser.Tilemaps.Tilemap = this.make.tilemap({ key: 'tile_dungeon_crawler' })
+    const tileset = map.addTilesetImage('tile_dungeon_crawler', 'tiles')
 
-    const particles = this.add.particles('red')
+    map.createLayer('Ground', tileset)
 
-    const emitter = particles.createEmitter({
-      speed: 100,
-      scale: { start: 1, end: 0 },
-      blendMode: 'ADD',
+    const wallsLayer = map.createLayer('Walls', tileset)
+    wallsLayer.setCollisionByProperty({ collides: true })
+
+    const debugGraphics = this.add.graphics().setAlpha(0.7)
+    wallsLayer.renderDebug(debugGraphics, {
+      tileColor: null,
+      collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
+      faceColor: new Phaser.Display.Color(40, 39, 37, 255),
     })
-
-    const logo = this.physics.add.image(400, 100, 'logo')
-
-    logo.setVelocity(100, 200)
-    logo.setBounce(1, 1)
-    logo.setCollideWorldBounds(true)
-
-    emitter.startFollow(logo)
   }
 }
